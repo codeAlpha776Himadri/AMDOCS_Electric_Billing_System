@@ -8,13 +8,13 @@ public class Customer extends User {
 
 
     private List<Bill> previousBills;
-    private double currentBill;
+    private Bill currentBill;
 
     public Customer(String username, String password, String name, String address) {
         super(username, password);
         this.name = name;
         this.previousBills = null;
-        this.currentBill = 0.0;
+        this.currentBill = null ;
         this.address = address ; 
     }
 
@@ -38,11 +38,11 @@ public class Customer extends User {
         this.previousBills.add(previousBill) ;
     }
 
-    public double getCurrentBill() {
+    public Bill getCurrentBill() {
         return currentBill;
     }
 
-    public void setCurrentBill(double currentBill) {
+    public void setCurrentBill(Bill currentBill) {
         this.currentBill = currentBill;
     }
 }

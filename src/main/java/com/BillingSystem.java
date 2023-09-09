@@ -2,17 +2,19 @@ package com;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Random ;
 
-import com.models.* ;
+import com.models.* ; 
 
 public class BillingSystem {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Customer> customers = new ArrayList<>();
+
         Admin admin = new Admin("admin", "adminpass");
 
         while (true) {
+
             System.out.println(" **** Welcome to the Electricity Billing Application! **** ");
             System.out.println("1. Login as Admin");
             System.out.println("2. Login as Customer");
@@ -20,7 +22,8 @@ public class BillingSystem {
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
+            int choice = scanner.nextInt() ;
+
             scanner.nextLine(); // Consume the newline character
 
             switch (choice) {
@@ -61,8 +64,10 @@ public class BillingSystem {
                     String newPassword = scanner.nextLine();
                     System.out.print("Enter Customer name: ");
                     String newName = scanner.nextLine();
+                    System.out.print("Enter Customer address: ");
+                    String address = scanner.nextLine();
 
-                    Customer newCustomer = new Customer(newUsername, newPassword, newName);
+                    Customer newCustomer = new Customer(newUsername, newPassword, newName , address);
                     customers.add(newCustomer);
                     System.out.println("Customer registration successful!");
                     break;
@@ -103,9 +108,9 @@ public class BillingSystem {
                     if (customer != null) {
                         System.out.print("Enter units consumed: ");
                         double unitsConsumed = scanner.nextDouble();
-                        double billAmount = admin.calculateBill(customer, unitsConsumed);
+                        Bill bill = admin.calculateBill(customer, unitsConsumed);
                         System.out.println("Bill calculated successfully.");
-                        System.out.println("Previous Bill: $" + customer.getPreviousBill());
+                        System.out.println("Previous Bills: $" + customer.getPreviousBills());
                         System.out.println("Current Bill: $" + customer.getCurrentBill());
                     } else {
                         System.out.println("Customer not found.");
@@ -195,18 +200,9 @@ public class BillingSystem {
 
     private static void viewPreviousBills(Customer customer) {
         System.out.println("\nPrevious Bills for " + customer.getName() + ":");
-        System.out.println("Previous Bill: $" + customer.getPreviousBill());
+        System.out.println("Previous Bills: $" + customer.getPreviousBills());
         System.out.println("Current Bill: $" + customer.getCurrentBill());
     }
-    
-    public static String getRandomNumberString() {
-    // It will generate 6 digit random Number.
-    // from 0 to 999999
-    Random rnd = new Random();
-    int number = rnd.nextInt(999999);
 
-    // this will convert any number sequence into 6 character.
-    return String.format("%06d", number);
-}
 }
 
